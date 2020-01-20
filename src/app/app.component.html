@@ -1,0 +1,13 @@
+<div class="p-5">
+<button type="button" class="btn btn-primary btn-sm" (click)="onChartBtnClick('AreaChart')">Area Chart</button>
+<button type="button" class="btn btn-primary btn-sm ml-2" (click)="onChartBtnClick('PieChart')">Doughnut Chart</button>
+</div>
+<div class="row">
+    <div class="col">
+        <app-google-chart [chartType]="g_type"></app-google-chart>
+    </div>
+    <div class="col">
+        <app-canvasjs-chart [chartType]="c_type"></app-canvasjs-chart>
+    </div>
+</div>
+
