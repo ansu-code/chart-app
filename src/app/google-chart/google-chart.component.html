@@ -10,7 +10,8 @@
    <div class="col">
     
       <select [(ngModel)]="selectedValue" id="opt">
-         <option *ngFor="let item of ddata; let i = index">
+        
+         <option *ngFor="let item of ddata; let i = index" [value]="i">
            {{item[0]}}
          </option>
        </select>
@@ -28,7 +29,7 @@
 </google-chart>
 <div class="pl-5" *ngIf="selectedValue">
    <div >
-   <b>Total Plan Balance as of <br>  {{selectedValue}}</b>
+   <b>Total Plan Balance as of <br>  {{ddata[selectedValue]}}</b>
    <table class="table table-striped">
     <thead>
       <tr>

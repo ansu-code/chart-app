@@ -31,6 +31,7 @@ export class GoogleChartComponent implements OnInit {
 
   onbtnGroupClick(value)
   {
+    this.selectedValue=null
     switch(value)
     {
       case "1":
