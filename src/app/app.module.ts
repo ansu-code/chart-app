@@ -10,13 +10,16 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgForm, FormsModule} from '@angular/forms';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { HighChartComponent } from './high-chart/high-chart.component';
+import { ChartjsChartComponent } from './chartjs-chart/chartjs-chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
     AppComponent,
     GoogleChartComponent,
     CanvasjsChartComponent,
-    HighChartComponent
+    HighChartComponent,
+    ChartjsChartComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,8 @@ import { HighChartComponent } from './high-chart/high-chart.component';
     GoogleChartsModule,
     NgbModule,
     FormsModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

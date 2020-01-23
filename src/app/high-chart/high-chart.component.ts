@@ -10,25 +10,32 @@ export class HighChartComponent implements OnInit {
   @Input('chartType')
   set name(type: string) {
     this.type=type;
-    this.highcharts = Highcharts;
+    //this.highcharts = Highcharts;
     if(this.type=='area')
     {
-      this.chartOptions.series=[
-        {
-           name: 'John',
-           data: [3, 4, 3, 5, 4, 10, 12]
-        }, 
-        {
-           name: 'Jane',
-           data: [1, 3, 4, 3, 3, 5, 4]
-        }
-     ];
+      
+      this.chartOptions.series[0].type="area";
+     
+      this.chartOptions.tooltip = {
+         formatter: function () {
+            console.log(this);
+            return '<b>' + this.series.name + '</b><br/>' +
+               this.key + ': ' + this.y;
+         }
+      };
 
     }
     else
     {
      
-      
+      this.chartOptions.series[0].type="pie";
+      this.chartOptions.tooltip = {
+         formatter: function () {
+            
+            return '<b>' + this.series.name + '</b><br/>' +
+               this.key + ': ' + this.y;
+         }
+      };
 
     }
   this.updateFlag=true;
@@ -42,7 +49,7 @@ export class HighChartComponent implements OnInit {
        type: 'area'
     },
     title: {
-       text: 'Average fruit consumption during one week'
+       text: 'High Chart'
     },
     subtitle : {
        style: {
@@ -62,7 +69,7 @@ export class HighChartComponent implements OnInit {
        backgroundColor:'#FFFFFF'
     },
     xAxis:{
-       categories: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'] 
+       categories: ['January'] 
     },
     yAxis : {
        title: {
@@ -76,29 +83,30 @@ export class HighChartComponent implements OnInit {
        min:0
     },
     tooltip : {
-       formatter: function () {
-          return '<b>' + this.series.name + '</b><br/>' +
-             this.x + ': ' + this.y;
-       }
+      
     },
     plotOptions : {
        area: {
           fillOpacity: 0.5 
-       }
+       },
+       pie: {
+         shadow: false,
+         center: ['50%', '50%'],
+         size:'100%',
+         innerSize: '40%'            
+      }
     },
     credits:{
        enabled: false
     },
-    series: [
-       {
-          name: 'John',
-          data: [3, 4, 3, 5, 4, 10, 12]
-       }, 
-       {
-          name: 'Jane',
-          data: [1, 3, 4, 3, 3, 5, 4]
-       }
-    ]
+    series: [{
+         type: 'area',
+         name: 'Balance',
+         data: [
+            ['January 3, 2020',   510000]
+           
+         ]
+      }]
  };
   updateFlag=false;
   
@@ -108,5 +116,81 @@ export class HighChartComponent implements OnInit {
   ngOnInit() {
    
   }
+  ddata = [
+   ['January 3,2020']
+  
+];
+  onbtnGroupClick(value)
+  {
+    this.selectedValue=null
+    switch(value)
+    {
+      case "1":
+      {
+        this.chartOptions.series[0].data =  [
+         ['January 3,2020',   510000]
+        
+      ];
+       this.ddata = [
+        ['January 3,2020']
+       
+     ];
+     this.chartOptions.xAxis={
+      categories: ['January'] 
+   };
+       break;
 
+      }
+      case "2":
+        {
+         this.chartOptions.series[0].data = [
+            ['November 1, 2019',660000] ,
+            ['December 23, 2019',660000],
+            ['January 3, 2020',512000] 
+         ];
+         this.ddata = [
+          ['November 1, 2019'] ,
+          ['December 23, 2019'],
+          ['January 3, 2020'] 
+       ];
+       this.chartOptions.xAxis={
+         categories: ['November','December','January'] 
+      };
+         break;
+
+        }
+      case "3":
+        {
+         this.chartOptions.series[0].data = [
+            ['August 17,2019', 663000],
+            ['September 19,2019', 639000],
+            ['October 21,2019', 673000],
+            ['November 1, 2019',660000] ,
+            ['December 23, 2019',660000],
+            ['January 3, 2020',512000] 
+         ];
+          
+  
+         this.ddata = [
+            
+          ['August 17,2019'] ,
+          ['September 19,2019'] ,
+          ['October 21,2019'] ,
+          ['November 23,2019'] ,
+          ['December 23,2019'],
+          ['January 3,2020'] 
+       ];
+       this.chartOptions.xAxis={
+         categories: ['August','September','October','November','December','January'] 
+      };
+         break;
+        }
+      default:
+        {
+
+        }
+    }
+    this.updateFlag=true;
+
+  }
 }
